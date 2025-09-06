@@ -8,7 +8,7 @@ export const PlayerList = () => {
   const { players } = usePlayers();
 
   return (
-    <div className="mb-6">
+    <div className="space-y-4">
       {players.map((player) => (
         <PlayerCard key={player.id} player={player} />
       ))}

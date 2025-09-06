@@ -7,7 +7,7 @@ import { PlayerWithStats } from '@/types/player';
 
 import { usePlayers } from '@/providers/player-provider';
 
-import { PF_ACTION, PF_ACTION_TYPE } from '@/const/player';
+import { PF_ACTION } from '@/const/player';
 
 export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
   const { onRecordAction } = usePlayers();
@@ -17,28 +17,29 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
       <CardContent className="p-3">
         <div className="sm:flex sm:justify-between sm:items-center">
           <div className="flex items-center">
-            {/* プレイヤーの情報を表示するためのコンポーネント */}
             <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">#{player.seat}</span>
             </div>
             <div>
               <span className="font-bold text-lg ml-2">{player.name}</span>
             </div>
-            <div className="ml-4 mr-2 text-sm text-gray-400 italic sm:inline">
-              <span>{player.stats?.hands}H</span>
-            </div>
-            <div className="flex gap-1 mr-2">
-              <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                <div className="text-sm font-bold text-yellow-400">{player.stats?.vpip}%</div>
-                <div className="text-xs text-gray-300">VPIP</div>
+            <div className="flex items-center ml-auto">
+              <div className="ml-4 mr-2 text-sm text-gray-400 italic sm:inline">
+                <span>{player.stats?.hands}H</span>
               </div>
-              <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                <div className="text-sm font-bold text-cyan-400">{player.stats?.pfr}%</div>
-                <div className="text-xs text-gray-300">PFR</div>
-              </div>
-              <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                <div className="text-sm font-bold text-red-400">{player.stats?.reRaise}%</div>
-                <div className="text-xs text-gray-300">3bet</div>
+              <div className="flex gap-1 mr-2">
+                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
+                  <div className="text-sm font-bold text-yellow-400">{player.stats?.vpip}%</div>
+                  <div className="text-xs text-gray-300">VPIP</div>
+                </div>
+                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
+                  <div className="text-sm font-bold text-cyan-400">{player.stats?.pfr}%</div>
+                  <div className="text-xs text-gray-300">PFR</div>
+                </div>
+                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
+                  <div className="text-sm font-bold text-red-400">{player.stats?.reRaise}%</div>
+                  <div className="text-xs text-gray-300">3bet</div>
+                </div>
               </div>
             </div>
           </div>

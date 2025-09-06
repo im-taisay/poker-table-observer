@@ -28,6 +28,11 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
     description: '',
   });
 
+  const handleAddPlayer = () => {
+    addPlayer(newPlayer);
+    setShowAddPlayer(false);
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-background/80">
       <Card className="bg-card border-border w-full max-w-sm">
@@ -77,7 +82,7 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
               キャンセル
             </Button>
             <Button
-              onClick={() => addPlayer(newPlayer)}
+              onClick={() => handleAddPlayer()}
               className="bg-primary hover:bg-primary/90 ml-2"
             >
               追加
