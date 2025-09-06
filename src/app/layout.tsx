@@ -26,7 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
+      <head>
+        <meta name="color-scheme" content="dark" />
+      </head>
       <body className={`font-sans ${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider
           attribute="class"
