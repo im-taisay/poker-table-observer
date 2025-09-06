@@ -1,11 +1,13 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import type { PlayerWithStats } from '@/types/player';
+import type { PlayerWithStats, PlayerStats, PlayerInfo } from '@/types/player';
+import { PF_ACTION, PF_ACTION_TYPE } from '@/const/player';
+import { calculateStats } from '@/lib/stats';
 
 type PlayersContextType = {
   players: PlayerWithStats[];
-  addPlayer: (p: PlayerWithStats) => void;
-  onRecordAction: (id: number, action: string) => void;
+  addPlayer: (player: PlayerInfo) => void;
+  onRecordAction: (id: number, action: PF_ACTION_TYPE) => void;
 };
 
 const PlayersContext = createContext<PlayersContextType | undefined>(undefined);
@@ -26,9 +28,63 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [players]);
 
-  const addPlayer = (p: PlayerWithStats) => setPlayers((s) => [...s, p]);
-  const onRecordAction = (id: number, action: string) => {
-    setPlayers((prev) => prev.map((pl) => (pl.id !== id ? pl : { ...pl /* update stats here */ })));
+  /**
+   * Adds a new player to the list.
+   * @param newPlayer The player information to add.
+   */
+  const addPlayer = (newPlayer: PlayerInfo) => {
+    setPlayers([
+      ...players,
+      {
+        id: players.length + 1,
+        seat: newPlayer.seat,
+        name: newPlayer.name,
+        description: newPlayer.description,
+        stats: {
+          hands: 0,
+          vpip: 0,
+          pfr: 0,
+          reRaise: 0,
+          pfCallCount: 0,
+          pfRaiseCount: 0,
+          pfReRaiseCount: 0,
+        },
+      },
+    ]);
+  };
+
+  /**
+   * Records an action performed by a player.
+   * @param playerId The ID of the player performing the action.
+   * @param action The action being performed.
+   */
+  const onRecordAction = (playerId: number, action: PF_ACTION_TYPE) => {
+    setPlayers((prev) =>
+      prev.map((player) => {
+        if (player.id !== playerId) return player;
+
+        const stats: PlayerStats = player.stats;
+
+        // add one hand played
+        let updatedStats = { ...stats, hands: stats.hands + 1 };
+
+        if (action === PF_ACTION.CALL) {
+          updatedStats.pfCallCount = stats.pfCallCount + 1;
+        } else if (action === PF_ACTION.RAISE) {
+          updatedStats.pfRaiseCount = stats.pfRaiseCount + 1;
+        } else if (action === PF_ACTION.RE_RAISE) {
+          updatedStats.pfRaiseCount = stats.pfRaiseCount + 1;
+          updatedStats.pfReRaiseCount = stats.pfReRaiseCount + 1;
+        }
+
+        updatedStats = calculateStats({ ...player, stats: updatedStats });
+
+        return {
+          ...player,
+          stats: updatedStats,
+        };
+      })
+    );
   };
 
   return (

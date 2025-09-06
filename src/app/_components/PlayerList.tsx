@@ -2,18 +2,15 @@
 
 import { PlayerCard } from './PlayerCard';
 
-import { PlayerWithStats } from '@/types/player';
+import { usePlayers } from '@/providers/player-provider';
 
-interface PlayerListProps {
-  playerList: PlayerWithStats[];
-  onRecordAction: (playerId: number, action: 'fold' | 'call' | 'raise' | 'reRaise') => void;
-}
+export const PlayerList = () => {
+  const { players } = usePlayers();
 
-export const PlayerList = ({ playerList, onRecordAction }: PlayerListProps) => {
   return (
     <div className="mb-6">
-      {playerList.map((player) => (
-        <PlayerCard key={player.id} player={player} onRecordAction={onRecordAction} />
+      {players.map((player) => (
+        <PlayerCard key={player.id} player={player} />
       ))}
     </div>
   );

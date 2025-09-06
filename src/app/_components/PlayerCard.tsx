@@ -5,15 +5,13 @@ import { Card, CardContent } from '@/components/ui/card';
 
 import { PlayerWithStats } from '@/types/player';
 
+import { usePlayers } from '@/providers/player-provider';
+
 import { PF_ACTION, PF_ACTION_TYPE } from '@/const/player';
 
-export const PlayerCard = ({
-  player,
-  onRecordAction,
-}: {
-  player: PlayerWithStats;
-  onRecordAction: (playerId: number, action: PF_ACTION_TYPE) => void;
-}) => {
+export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
+  const { onRecordAction } = usePlayers();
+
   return (
     <Card key={player.seat} className="bg-card border-border hover:bg-card/80 transition-colors">
       <CardContent className="p-3">

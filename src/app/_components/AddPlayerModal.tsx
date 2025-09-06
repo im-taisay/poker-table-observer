@@ -10,14 +10,17 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 
+import { usePlayers } from '@/providers/player-provider';
+
 import { PlayerInfo } from '@/types/player';
 
 interface AddPlayerModalProps {
   setShowAddPlayer: (show: boolean) => void;
-  addPlayer: (player: PlayerInfo) => void;
 }
 
-export const AddPlayerModal = ({ setShowAddPlayer, addPlayer }: AddPlayerModalProps) => {
+export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
+  const { addPlayer } = usePlayers();
+
   const [newPlayer, setNewPlayer] = useState<PlayerInfo>({
     id: 0, // id will be set when adding the player
     seat: 1,
