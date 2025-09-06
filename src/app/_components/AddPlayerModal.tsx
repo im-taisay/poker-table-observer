@@ -17,8 +17,13 @@ interface AddPlayerModalProps {
   addPlayer: (player: PlayerInfo) => void;
 }
 
-export default function AddPlayerModal({ setShowAddPlayer, addPlayer }: AddPlayerModalProps) {
-  const [newPlayer, setNewPlayer] = useState<PlayerInfo>({ seat: 1, name: '', description: '' });
+export const AddPlayerModal = ({ setShowAddPlayer, addPlayer }: AddPlayerModalProps) => {
+  const [newPlayer, setNewPlayer] = useState<PlayerInfo>({
+    id: 0, // id will be set when adding the player
+    seat: 1,
+    name: '',
+    description: '',
+  });
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-background/80">
@@ -79,4 +84,4 @@ export default function AddPlayerModal({ setShowAddPlayer, addPlayer }: AddPlaye
       </Card>
     </div>
   );
-}
+};

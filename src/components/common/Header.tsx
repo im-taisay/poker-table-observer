@@ -7,7 +7,7 @@
 //   console.log('clicked');
 // };
 
-export default function Header() {
+export const Header = () => {
   return (
     // Header
     <div className="">
@@ -28,4 +28,4 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
