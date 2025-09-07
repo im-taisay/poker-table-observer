@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { StatBadge } from '@/components/common/StatBadge';
 
 import { PlayerWithStats } from '@/types/player';
 
@@ -28,18 +29,9 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 <span>{player.stats?.hands}H</span>
               </div>
               <div className="flex gap-1 mr-2">
-                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                  <div className="text-sm font-bold text-yellow-400">{player.stats?.vpip}%</div>
-                  <div className="text-xs text-gray-300">VPIP</div>
-                </div>
-                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                  <div className="text-sm font-bold text-cyan-400">{player.stats?.pfr}%</div>
-                  <div className="text-xs text-gray-300">PFR</div>
-                </div>
-                <div className="bg-slate-800 px-2 py-1 rounded min-w-[45px] text-center">
-                  <div className="text-sm font-bold text-red-400">{player.stats?.reRaise}%</div>
-                  <div className="text-xs text-gray-300">3bet</div>
-                </div>
+                <StatBadge value={player.stats?.vpip} label="VPIP" colorClass="text-yellow-400" />
+                <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-cyan-400" />
+                <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-red-400" />
               </div>
             </div>
           </div>

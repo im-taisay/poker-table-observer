@@ -8,6 +8,8 @@ type PlayersContextType = {
   players: PlayerWithStats[];
   addPlayer: (player: PlayerInfo) => void;
   onRecordAction: (id: number, action: PF_ACTION_TYPE) => void;
+  onUpdatePlayer: (player: PlayerInfo) => void;
+  onResetStats: (id: number) => void;
 };
 
 const PlayersContext = createContext<PlayersContextType | undefined>(undefined);
@@ -39,7 +41,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         id: players.length + 1,
         seat: newPlayer.seat,
         name: newPlayer.name,
-        description: newPlayer.description,
+        notes: newPlayer.notes,
         stats: {
           hands: 0,
           vpip: 0,
@@ -87,8 +89,36 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  /**
+   * Updates the information of a player.
+   * @param updatedPlayer The player information to update.
+   */
+  const onUpdatePlayer = (updatedPlayer: PlayerInfo) => {
+    setPlayers((prev) =>
+      prev.map((player) =>
+        player.id === updatedPlayer.id ? { ...player, ...updatedPlayer } : player
+      )
+    );
+  };
+
+  /**
+   * Resets the stats for a player.
+   * @param id The ID of the player whose stats to reset.
+   */
+  const onResetStats = (id: number) => {
+    setPlayers((prev) =>
+      prev.map((player) =>
+        player.id === id
+          ? { ...player, stats: { ...player.stats, hands: 0, vpip: 0, pfr: 0, reRaise: 0 } }
+          : player
+      )
+    );
+  };
+
   return (
-    <PlayersContext.Provider value={{ players, addPlayer, onRecordAction }}>
+    <PlayersContext.Provider
+      value={{ players, addPlayer, onRecordAction, onUpdatePlayer, onResetStats }}
+    >
       {children}
     </PlayersContext.Provider>
   );

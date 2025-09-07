@@ -25,7 +25,7 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
     id: 0, // id will be set when adding the player
     seat: 1,
     name: '',
-    description: '',
+    notes: '',
   });
 
   const handleAddPlayer = () => {
@@ -64,10 +64,10 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
               />
             </div>
             <div>
-              <Label className="text-sm text-muted-foreground mb-2 block">説明:</Label>
+              <Label className="text-sm text-muted-foreground mb-2 block">Notes:</Label>
               <Textarea
-                value={newPlayer.description}
-                onChange={(e) => setNewPlayer({ ...newPlayer, description: e.target.value })}
+                value={newPlayer.notes}
+                onChange={(e) => setNewPlayer({ ...newPlayer, notes: e.target.value })}
                 placeholder="プレイヤーの詳細を入力..."
                 className="w-full"
               />

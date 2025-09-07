@@ -2,7 +2,7 @@ export interface PlayerInfo {
   id: number;
   seat: number;
   name: string;
-  description: string;
+  notes: string;
 }
 
 export interface PlayerStats {
