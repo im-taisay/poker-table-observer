@@ -1,6 +1,6 @@
 'use client';
 
-import { PlayingCard } from './PlayingCard';
+import { PlayingCard } from './PlayingCardBtn';
 import { RANKS, SUITS } from '@/const/game';
 import type { PlayingCardType } from '@/types/game';
 

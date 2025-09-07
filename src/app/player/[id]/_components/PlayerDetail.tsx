@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { User, Edit2, Trash2, Plus } from 'lucide-react';
+import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -82,6 +83,20 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal }: PlayerDetailPr
           </CardHeader>
           <CardContent className="p-4">
             <div className="text-sm text-muted-foreground">No hand history available.</div>
+            <div className="flex justify-between w-30 mt-2">
+              <RecordedHand
+                hand={[
+                  { rank: 'A', suit: 'hearts' },
+                  { rank: 'K', suit: 'spades' },
+                ]}
+              />
+              <RecordedHand
+                hand={[
+                  { rank: 'A', suit: 'hearts' },
+                  { rank: 'K', suit: 'spades' },
+                ]}
+              />
+            </div>
           </CardContent>
         </Card>
       </div>

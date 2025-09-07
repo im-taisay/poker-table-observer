@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { PlayingCardSelector } from '@/components/common/PlayingCardSelector';
+import { DisplayPlayingCard } from '@/components/common/DisplayPlayingCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -27,33 +28,7 @@ export const SelectShowedHandsModal = ({
               <div className="text-sm text-muted-foreground mb-2">Selected Hands:</div>
               <div className="flex gap-2 items-center">
                 {selectedCards.map((card, index) => {
-                  const bgKey = (
-                    card.suit === SUITS.HEARTS.LABEL
-                      ? SUITS.HEARTS.COLOR
-                      : card.suit === SUITS.DIAMONDS.LABEL
-                        ? SUITS.DIAMONDS.COLOR
-                        : card.suit === SUITS.CLUBS.LABEL
-                          ? SUITS.CLUBS.COLOR
-                          : SUITS.SPADES.COLOR
-                  ) as keyof typeof CARD_COLOR_CLASSES;
-                  const suit = Object.values(SUITS)
-                    .map((element: { LABEL: string; DISPLAY: string; COLOR: string }) => {
-                      if (element.LABEL === card.suit) {
-                        return element.DISPLAY;
-                      }
-                      return null;
-                    })
-                    .filter(Boolean)[0];
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => {}}
-                      className={`w-12 h-16 ${CARD_COLOR_CLASSES[bgKey]} border-2 border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer `}
-                    >
-                      <span className="text-lg font-bold text-white">{card.rank}</span>
-                      <span className={`text-lg text-white `}>{suit}</span>
-                    </div>
-                  );
+                  return <DisplayPlayingCard key={index} {...card} />;
                 })}
                 {Array.from({ length: 2 - selectedCards.length }).map((_, index) => (
                   <div
