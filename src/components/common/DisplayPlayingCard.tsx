@@ -1,3 +1,5 @@
+'use client';
+
 import { PlayingCardType } from '@/types/game';
 import { SUITS, CARD_COLOR_CLASSES } from '@/const/game';
 

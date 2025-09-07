@@ -1,3 +1,5 @@
+import { PlayingCardType } from '@/types/game';
+
 export interface PlayerInfo {
   id: number;
   seat: number;
@@ -13,6 +15,7 @@ export interface PlayerStats {
   pfCallCount: number; // Pre-Flop Call Count
   pfRaiseCount: number; // Pre-Flop Raise Count
   pfReRaiseCount: number; // Pre-Flop 3bet Count
+  showedHands?: { position: string; hand: [PlayingCardType, PlayingCardType] }[]; // Showed Hands
 }
 
 // プレイヤーに統計を合成した型

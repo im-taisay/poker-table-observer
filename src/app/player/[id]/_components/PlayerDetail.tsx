@@ -1,6 +1,5 @@
 'use client';
 
-import { useParams } from 'next/navigation';
 import { User, Edit2, Trash2, Plus } from 'lucide-react';
 import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
@@ -12,14 +11,12 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 interface PlayerDetailProps {
   setIsOpenSelectShowedHandsModal: (open: boolean) => void;
+  playerId: number;
 }
 
-export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal }: PlayerDetailProps) => {
+export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: PlayerDetailProps) => {
   const { players, onUpdatePlayer, onResetStats } = usePlayers();
-  // get id from url
-  const params = useParams();
-  const idParam = params?.id;
-  const playerId = idParam ? Number(idParam) : undefined;
+
   const player = players.find((p) => p.id === playerId);
 
   if (!player) return null;
@@ -84,23 +81,13 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal }: PlayerDetailPr
           <CardContent className="p-4">
             <div className="text-sm text-muted-foreground">No hand history available.</div>
             <div className="flex justify-between w-30 mt-2">
-              <RecordedHand
-                hand={[
-                  { rank: 'A', suit: 'hearts' },
-                  { rank: 'K', suit: 'spades' },
-                ]}
-              />
-              <RecordedHand
-                hand={[
-                  { rank: 'A', suit: 'hearts' },
-                  { rank: 'K', suit: 'spades' },
-                ]}
-              />
+              {player.stats?.showedHands?.map((recordedHand, index) => (
+                <RecordedHand key={index} hand={recordedHand.hand} />
+              ))}
             </div>
           </CardContent>
         </Card>
       </div>
-      {/* <SelectShowedHandsModal /> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import { Card } from '@/components/ui/card';
+'use client';
+
 import { DisplayPlayingCard } from '@/components/common/DisplayPlayingCard';
 import { PlayingCardType } from '@/types/game';
-import { POSITIONS, SUITS, CARD_COLOR_CLASSES } from '@/const/game';
 
 interface RecordedHandProps {
   hand: [PlayingCardType, PlayingCardType];

@@ -6,18 +6,24 @@ import { DisplayPlayingCard } from '@/components/common/DisplayPlayingCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-import { POSITIONS, SUITS, CARD_COLOR_CLASSES } from '@/const/game';
+import { POSITIONS } from '@/const/game';
 import { PlayingCardType } from '@/types/game';
+
+import { usePlayers } from '@/providers/player-provider';
 
 interface SelectShowedHandsModalProps {
   setIsOpenSelectShowedHandsModal: (isOpen: boolean) => void;
+  playerId: number;
 }
 
 export const SelectShowedHandsModal = ({
   setIsOpenSelectShowedHandsModal,
+  playerId,
 }: SelectShowedHandsModalProps) => {
   const [selectedPosition, setSelectedPosition] = useState(POSITIONS[0]);
   const [selectedCards, setSelectedCards] = useState<PlayingCardType[]>([]);
+
+  const { addShowedHands } = usePlayers();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-background/80">
@@ -64,7 +70,15 @@ export const SelectShowedHandsModal = ({
             }}
           />
           <div className="flex justify-center gap-3">
-            <Button className="mt-4 w-24 bg-primary hover:bg-primary/90">Save</Button>
+            <Button
+              onClick={() => {
+                addShowedHands(playerId, selectedPosition, [selectedCards[0], selectedCards[1]]);
+                setIsOpenSelectShowedHandsModal(false);
+              }}
+              className="mt-4 w-24 bg-primary hover:bg-primary/90"
+            >
+              Save
+            </Button>
             <Button
               onClick={() => setIsOpenSelectShowedHandsModal(false)}
               className="mt-4 w-24 hover:bg-secondary/10 bg-secondary"

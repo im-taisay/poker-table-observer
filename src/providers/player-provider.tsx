@@ -1,6 +1,8 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { PlayerWithStats, PlayerStats, PlayerInfo } from '@/types/player';
+import { PlayingCardType } from '@/types/game';
+
 import { PF_ACTION, PF_ACTION_TYPE } from '@/const/player';
 import { calculateStats } from '@/lib/stats';
 
@@ -10,6 +12,11 @@ type PlayersContextType = {
   onRecordAction: (id: number, action: PF_ACTION_TYPE) => void;
   onUpdatePlayer: (player: PlayerInfo) => void;
   onResetStats: (id: number) => void;
+  addShowedHands: (
+    playerId: number,
+    position: string,
+    hand: [PlayingCardType, PlayingCardType]
+  ) => void;
 };
 
 const PlayersContext = createContext<PlayersContextType | undefined>(undefined);
@@ -21,13 +28,17 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     try {
       const raw = localStorage.getItem('players');
       if (raw) setPlayers(JSON.parse(raw));
-    } catch {}
+    } catch {
+      // [TODO] error handling
+    }
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem('players', JSON.stringify(players));
-    } catch {}
+    } catch {
+      // [TODO] error handling
+    }
   }, [players]);
 
   /**
@@ -115,9 +126,37 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  /**
+   * Adds showed hands for a player.
+   * @param playerId The ID of the player.
+   * @param hand The hand to add.
+   */
+  const addShowedHands = (
+    playerId: number,
+    position: string,
+    hand: [PlayingCardType, PlayingCardType]
+  ) => {
+    setPlayers((prev) =>
+      prev.map((player) =>
+        player.id === playerId
+          ? {
+              ...player,
+              stats: {
+                ...player.stats,
+                showedHands: [
+                  ...(player.stats.showedHands || []),
+                  { position, hand: [hand[0], hand[1]] },
+                ],
+              },
+            }
+          : player
+      )
+    );
+  };
+
   return (
     <PlayersContext.Provider
-      value={{ players, addPlayer, onRecordAction, onUpdatePlayer, onResetStats }}
+      value={{ players, addPlayer, onRecordAction, onUpdatePlayer, onResetStats, addShowedHands }}
     >
       {children}
     </PlayersContext.Provider>
