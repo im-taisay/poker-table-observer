@@ -89,7 +89,9 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
             </div>
           </CardHeader>
           <CardContent className="p-4">
-            <div className="text-sm text-muted-foreground">No hand history available.</div>
+            {player.stats.showedHands?.length === 0 && (
+              <div className="text-sm text-muted-foreground">No hand history.</div>
+            )}
             <div className="flex justify-between w-30 mt-2">
               {player.stats?.showedHands?.map((recordedHand, index) => (
                 <RecordedHand
