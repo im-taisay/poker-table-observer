@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { User, Edit2, Trash2, Trash, Plus } from 'lucide-react';
 import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
@@ -21,14 +21,19 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
 
   const player = players.find((p) => p.id === playerId);
 
-  if (!player) return null;
-
   const [isEditing, setIsEditing] = useState(false);
   const [editPlayerInfo, setEditPlayerInfo] = useState<{ name: string; seat: number }>({
-    name: player.name,
-    seat: player.seat,
+    name: '',
+    seat: 0,
   });
   const { name: editName, seat: editSeat } = editPlayerInfo;
+
+  useEffect(() => {
+    if (!player || isEditing) return;
+    setEditPlayerInfo({ name: player.name, seat: player.seat });
+  }, [player, isEditing]);
+
+  if (!player) return null;
 
   return (
     <div>

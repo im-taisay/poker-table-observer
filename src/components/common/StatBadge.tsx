@@ -22,7 +22,7 @@ export const StatBadge = ({
 }: StatBadgeProps) => {
   const display = value === undefined || value === null || value === '' ? '-' : value;
   // set CSS variable --badge-h for children to compute font-size relative to container height
-  const style = { ['--badge-h' as any]: `${badgeHeight}px` };
+  const style: React.CSSProperties = { '--badge-h': `${badgeHeight}px` } as React.CSSProperties;
 
   return (
     <div
