@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import { Plus } from 'lucide-react';
 
-import { PlayerProvider } from '@/providers/player-provider';
-
 import { Header } from '@/components/common/Header';
 import { PlayerList } from './_components/PlayerList';
 import { Button } from '@/components/ui/button';
@@ -15,23 +13,21 @@ export const PageClient = () => {
   const [isOpenAddPlayerModal, setIsOpenAddPlayerModal] = useState(false);
 
   return (
-    <PlayerProvider>
-      <div>
-        <div className="mb-6">
-          <Header />
-        </div>
-        <PlayerList />
-        <div className="flex justify-center sm:justify-end">
-          <Button
-            onClick={() => setIsOpenAddPlayerModal(true)}
-            className="self-center sm:self-end bg-primary hover:bg-primary/90 mt-4 sm:mt-0"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Add Player
-          </Button>
-        </div>
-        {isOpenAddPlayerModal && <AddPlayerModal setShowAddPlayer={setIsOpenAddPlayerModal} />}
+    <div>
+      <div className="mb-6">
+        <Header />
       </div>
-    </PlayerProvider>
+      <PlayerList />
+      <div className="flex justify-center sm:justify-end">
+        <Button
+          onClick={() => setIsOpenAddPlayerModal(true)}
+          className="self-center sm:self-end bg-primary hover:bg-primary/90 mt-4 sm:mt-0"
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Add Player
+        </Button>
+      </div>
+      {isOpenAddPlayerModal && <AddPlayerModal setShowAddPlayer={setIsOpenAddPlayerModal} />}
+    </div>
   );
 };

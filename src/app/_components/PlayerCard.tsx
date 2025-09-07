@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { StatBadge } from '@/components/common/StatBadge';
@@ -11,6 +13,12 @@ import { usePlayers } from '@/providers/player-provider';
 import { PF_ACTION } from '@/const/player';
 
 export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
+  const router = useRouter();
+
+  const goToPlayerDetail = (id: number) => {
+    router.push(`/player/${id}`);
+  };
+
   const { onRecordAction } = usePlayers();
 
   return (
@@ -21,7 +29,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
             <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">#{player.seat}</span>
             </div>
-            <div>
+            <div onClick={() => goToPlayerDetail(player.id)} className="ml-3">
               <span className="font-bold text-lg ml-2">{player.name}</span>
             </div>
             <div className="flex items-center ml-auto">

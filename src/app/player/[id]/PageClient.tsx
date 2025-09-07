@@ -7,8 +7,6 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { PlayerDetail } from './_components/PlayerDetail';
 import { SelectShowedHandsModal } from './_components/SelectShowedHandsModal';
 
-import { PlayerProvider } from '@/providers/player-provider';
-
 export const PageClient = () => {
   const [isOpenSelectShowedHandsModal, setIsOpenSelectShowedHandsModal] = useState(false);
 
@@ -20,7 +18,7 @@ export const PageClient = () => {
   if (!playerId) return null;
 
   return (
-    <PlayerProvider>
+    <div>
       <div className="space-y-6">
         <Card>
           <CardHeader>
@@ -40,6 +38,6 @@ export const PageClient = () => {
           setIsOpenSelectShowedHandsModal={setIsOpenSelectShowedHandsModal}
         />
       )}
-    </PlayerProvider>
+    </div>
   );
 };
