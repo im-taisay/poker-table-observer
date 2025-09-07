@@ -17,6 +17,7 @@ type PlayersContextType = {
     position: string,
     hand: [PlayingCardType, PlayingCardType]
   ) => void;
+  onResetHands: (playerId: number) => void;
 };
 
 const PlayersContext = createContext<PlayersContextType | undefined>(undefined);
@@ -154,9 +155,29 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  /**
+   * Resets the showed hands for a player.
+   * @param playerId The ID of the player whose hands to reset.
+   */
+  const onResetHands = (playerId: number) => {
+    setPlayers((prev) =>
+      prev.map((player) =>
+        player.id === playerId ? { ...player, stats: { ...player.stats, showedHands: [] } } : player
+      )
+    );
+  };
+
   return (
     <PlayersContext.Provider
-      value={{ players, addPlayer, onRecordAction, onUpdatePlayer, onResetStats, addShowedHands }}
+      value={{
+        players,
+        addPlayer,
+        onRecordAction,
+        onUpdatePlayer,
+        onResetStats,
+        addShowedHands,
+        onResetHands,
+      }}
     >
       {children}
     </PlayersContext.Provider>

@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Edit2, Trash2, Plus } from 'lucide-react';
+import { User, Edit2, Trash2, Trash, Plus } from 'lucide-react';
 import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
@@ -15,7 +15,7 @@ interface PlayerDetailProps {
 }
 
 export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: PlayerDetailProps) => {
-  const { players, onUpdatePlayer, onResetStats } = usePlayers();
+  const { players, onUpdatePlayer, onResetStats, onResetHands } = usePlayers();
 
   const player = players.find((p) => p.id === playerId);
 
@@ -56,16 +56,7 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
           />
         </div>
       </div>
-      <div className="flex justify-between mt-4">
-        <Button
-          variant="outline"
-          onClick={() => onResetStats(player.id)}
-          className="bg-destructive hover:bg-destructive/90"
-        >
-          <Trash2 className="w-4 h-4 mr-2" />
-          Reset Stats
-        </Button>
-      </div>
+
       {/* showed hands history */}
       <div className="mt-4">
         <Card>
@@ -87,6 +78,30 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <div className="mt-4 flex justify-between">
+        <div className="flex justify-between mt-4">
+          <Button
+            variant="outline"
+            onClick={() => onResetStats(player.id)}
+            className="bg-destructive hover:bg-destructive/90"
+          >
+            <Trash2 className="w-4 h-4 mr-2" />
+            Reset Stats
+          </Button>
+        </div>
+
+        <div className="flex justify-between mt-4">
+          <Button
+            variant="outline"
+            onClick={() => onResetHands(player.id)}
+            className="bg-destructive hover:bg-destructive/90"
+          >
+            <Trash className="w-4 h-4 mr-2" />
+            Reset Hands
+          </Button>
+        </div>
       </div>
     </div>
   );
