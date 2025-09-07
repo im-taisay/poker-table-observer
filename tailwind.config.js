@@ -9,7 +9,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Map tailwind color names to CSS variables declared in globals.css
         primary: 'var(--primary)',
         'primary-foreground': 'var(--primary-foreground)',
         background: 'var(--background)',

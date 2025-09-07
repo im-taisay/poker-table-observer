@@ -7,7 +7,9 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { SelectShowedHandsModal } from './SelectShowedHandsModal';
 import { usePlayers } from '@/providers/player-provider';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 export const PlayerDetail = () => {
   const { players, onUpdatePlayer, onResetStats } = usePlayers();
@@ -64,6 +66,17 @@ export const PlayerDetail = () => {
           Reset Stats
         </Button>
       </div>
+      <div className="mt-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Showed Hand</CardTitle>
+          </CardHeader>
+          <CardContent className="p-4">
+            <div className="text-sm text-muted-foreground">No hand history available.</div>
+          </CardContent>
+        </Card>
+      </div>
+      <SelectShowedHandsModal />
     </div>
   );
 };
