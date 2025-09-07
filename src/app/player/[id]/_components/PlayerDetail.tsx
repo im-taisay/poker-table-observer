@@ -39,9 +39,28 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
       <div className="mb-4">
         <Label className="text-xs text-muted-foreground mb-2 block">Stats</Label>
         <div className="flex gap-2 flex-wrap">
-          <StatBadge value={player.stats?.vpip} label="VPIP" colorClass="text-yellow-400" />
-          <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-cyan-400" />
-          <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-red-400" />
+          <StatBadge
+            value={player.stats?.vpip}
+            label="VPIP"
+            colorClass="text-yellow-400"
+            minWidth="w-20"
+            minHeight="h-14"
+            badgeHeight={50}
+          />
+          <StatBadge
+            value={player.stats?.pfr}
+            label="PFR"
+            colorClass="text-cyan-400"
+            minWidth="w-20"
+            badgeHeight={50}
+          />
+          <StatBadge
+            value={player.stats?.reRaise}
+            label="3bet"
+            colorClass="text-red-400"
+            minWidth="w-20"
+            badgeHeight={50}
+          />
         </div>
       </div>
       <div className="space-y-3">
@@ -73,7 +92,11 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
             <div className="text-sm text-muted-foreground">No hand history available.</div>
             <div className="flex justify-between w-30 mt-2">
               {player.stats?.showedHands?.map((recordedHand, index) => (
-                <RecordedHand key={index} hand={recordedHand.hand} />
+                <RecordedHand
+                  key={index}
+                  hand={recordedHand.hand}
+                  position={recordedHand.position}
+                />
               ))}
             </div>
           </CardContent>
