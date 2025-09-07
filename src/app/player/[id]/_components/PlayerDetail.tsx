@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { User, Edit2, Trash2, Trash, Plus } from 'lucide-react';
 import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { usePlayers } from '@/providers/player-provider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -21,21 +23,70 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
 
   if (!player) return null;
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editPlayerInfo, setEditPlayerInfo] = useState<{ name: string; seat: number }>({
+    name: player.name,
+    seat: player.seat,
+  });
+  const { name: editName, seat: editSeat } = editPlayerInfo;
+
   return (
     <div>
-      <div className="flex items-center justify-between w-full">
-        <span className="flex items-center gap-2">
-          <User className="w-5 h-5" />#{player.seat} {player.name}
-        </span>
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={() => console.log('Edit player', player.id)}
-          className="h-8 w-8 p-0"
-        >
-          <Edit2 className="w-4 h-4" />
-        </Button>
-      </div>
+      {isEditing ? (
+        <div>
+          <div className="flex items-center gap-2 flex-1">
+            <Input
+              type="number"
+              value={editSeat}
+              onChange={(e) =>
+                setEditPlayerInfo({ ...editPlayerInfo, seat: Number.parseInt(e.target.value) })
+              }
+              className="w-16 h-8 text-sm"
+              placeholder="席"
+            />
+            <Input
+              value={editName}
+              onChange={(e) => setEditPlayerInfo({ ...editPlayerInfo, name: e.target.value })}
+              className="flex-1 h-8 text-sm"
+              placeholder="名前"
+            />
+          </div>
+          <div className="flex gap-2 mt-3 justify-end">
+            <Button
+              size="sm"
+              onClick={() => {
+                onUpdatePlayer({ ...player, ...editPlayerInfo });
+                setIsEditing(false);
+              }}
+              className="h-8 px-3"
+            >
+              保存
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setIsEditing(false)}
+              className="h-8 px-3 bg-transparent"
+            >
+              キャンセル
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-between w-full">
+          <span className="flex items-center gap-2">
+            <User className="w-5 h-5" />#{player.seat} {player.name}
+          </span>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setIsEditing(true)}
+            className="h-8 w-8 p-0"
+          >
+            <Edit2 className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
       <div className="mb-4">
         <Label className="text-xs text-muted-foreground mb-2 block">Stats</Label>
         <div className="flex gap-2 flex-wrap">
