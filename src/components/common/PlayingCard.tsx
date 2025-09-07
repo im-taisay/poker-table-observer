@@ -1,3 +1,5 @@
+'use client';
+
 interface PlayingCardProps {
   rank: string;
   suit: string;
@@ -23,7 +25,7 @@ export const PlayingCard = ({
   disabled,
 }: PlayingCardProps) => {
   const base =
-    'w-8 h-8 text-white rounded flex flex-col items-center justify-center text-xs font-bold';
+    'w-6.5 h-12 text-white rounded flex flex-col items-center justify-center text-xs font-bold';
   const colorClass = (COLOR_CLASSES as Record<string, string>)[bgColor] ?? COLOR_CLASSES.gray;
 
   return (

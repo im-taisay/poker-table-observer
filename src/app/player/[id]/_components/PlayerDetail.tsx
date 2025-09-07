@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { User, Edit2, Trash2 } from 'lucide-react';
+import { User, Edit2, Trash2, Plus } from 'lucide-react';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,11 @@ import { SelectShowedHandsModal } from './SelectShowedHandsModal';
 import { usePlayers } from '@/providers/player-provider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-export const PlayerDetail = () => {
+interface PlayerDetailProps {
+  setIsOpenSelectShowedHandsModal: (open: boolean) => void;
+}
+
+export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal }: PlayerDetailProps) => {
   const { players, onUpdatePlayer, onResetStats } = usePlayers();
   // get id from url
   const params = useParams();
@@ -66,17 +70,24 @@ export const PlayerDetail = () => {
           Reset Stats
         </Button>
       </div>
+      {/* showed hands history */}
       <div className="mt-4">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Showed Hand</CardTitle>
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-lg">Showed Hand</CardTitle>
+              <Button onClick={() => setIsOpenSelectShowedHandsModal(true)}>
+                <Plus />
+                Add Hand
+              </Button>
+            </div>
           </CardHeader>
           <CardContent className="p-4">
             <div className="text-sm text-muted-foreground">No hand history available.</div>
           </CardContent>
         </Card>
       </div>
-      <SelectShowedHandsModal />
+      {/* <SelectShowedHandsModal /> */}
     </div>
   );
 };

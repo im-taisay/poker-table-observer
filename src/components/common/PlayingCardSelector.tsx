@@ -1,3 +1,5 @@
+'use client';
+
 import { PlayingCard } from './PlayingCard';
 
 export const PlayingCardSelector = () => {
