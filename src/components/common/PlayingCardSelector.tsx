@@ -1,56 +1,60 @@
 'use client';
 
 import { PlayingCard } from './PlayingCard';
+import { RANKS, SUITS } from '@/const/game';
+import type { PlayingCardType } from '@/types/game';
 
-export const PlayingCardSelector = () => {
-  const ranks = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
-  const suits = ['♠︎', '♥︎', '♦︎', '♣︎'];
+interface PlayingCardSelectorProps {
+  selectedCards: PlayingCardType[];
+  onSelectCard: (rank: string, suit: string) => void;
+}
 
+export const PlayingCardSelector = ({ selectedCards, onSelectCard }: PlayingCardSelectorProps) => {
   return (
     <div className="space-y-2">
       <div className="grid grid-cols-13 gap-1">
         {/* Spades row */}
-        {ranks.map((rank) => (
+        {RANKS.map((rank) => (
           <PlayingCard
-            key={`${rank}♠︎`}
+            key={`${rank}${SUITS.SPADES}`}
             rank={rank}
-            suit="♠︎"
-            selectedCards={[]}
-            onSelectCard={() => {}}
-            bgColor="gray"
+            suit={{ display: SUITS.SPADES.DISPLAY, label: SUITS.SPADES.LABEL }}
+            selectedCards={selectedCards}
+            onSelectCard={onSelectCard}
+            bgColor={SUITS.SPADES.COLOR}
           />
         ))}
         {/* Hearts row */}
-        {ranks.map((rank) => (
+        {RANKS.map((rank) => (
           <PlayingCard
-            key={`${rank}♥︎`}
+            key={`${rank}${SUITS.HEARTS}`}
             rank={rank}
-            suit="♥︎"
-            selectedCards={[]}
-            onSelectCard={() => {}}
-            bgColor="red"
+            suit={{ display: SUITS.HEARTS.DISPLAY, label: SUITS.HEARTS.LABEL }}
+            selectedCards={selectedCards}
+            onSelectCard={onSelectCard}
+            bgColor={SUITS.HEARTS.COLOR}
           />
         ))}
-        {/* Clubd row */}
-        {ranks.map((rank) => (
+        {/* Clubs row */}
+        {RANKS.map((rank) => (
           <PlayingCard
-            key={`${rank}♣︎`}
+            key={`${rank}${SUITS.CLUBS}`}
             rank={rank}
-            suit="♣︎"
-            selectedCards={[]}
-            onSelectCard={() => {}}
-            bgColor="green"
+            suit={{ display: SUITS.CLUBS.DISPLAY, label: SUITS.CLUBS.LABEL }}
+            selectedCards={selectedCards}
+            onSelectCard={onSelectCard}
+            bgColor={SUITS.CLUBS.COLOR}
           />
         ))}
         {/* Diamonds row */}
-        {ranks.map((rank) => (
+        {RANKS.map((rank) => (
           <PlayingCard
-            key={`${rank}♦︎`}
+            key={`${rank}${SUITS.DIAMONDS}`}
             rank={rank}
-            suit="♦︎"
-            selectedCards={[]}
-            onSelectCard={() => {}}
-            bgColor="blue"
+            suit={{ display: SUITS.DIAMONDS.DISPLAY, label: SUITS.DIAMONDS.LABEL }}
+            selectedCards={selectedCards}
+            onSelectCard={onSelectCard}
+            bgColor={SUITS.DIAMONDS.COLOR}
           />
         ))}
       </div>

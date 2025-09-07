@@ -5,9 +5,7 @@ import { User, Edit2, Trash2, Plus } from 'lucide-react';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { SelectShowedHandsModal } from './SelectShowedHandsModal';
 import { usePlayers } from '@/providers/player-provider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 

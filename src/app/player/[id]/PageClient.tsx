@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { PlayerDetail } from './_components/PlayerDetail';
 import { SelectShowedHandsModal } from './_components/SelectShowedHandsModal';
 
-import { PlayerProvider, usePlayers } from '@/providers/player-provider';
+import { PlayerProvider } from '@/providers/player-provider';
 
 export const PageClient = () => {
   const [isOpenSelectShowedHandsModal, setIsOpenSelectShowedHandsModal] = useState(false);

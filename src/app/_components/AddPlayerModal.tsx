@@ -39,7 +39,7 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
         <CardHeader>
           <CardTitle className="text-card-foreground flex items-center gap-2">
             <Plus className="w-5 h-5" />
-            プレイヤー追加
+            Add Player
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4">
@@ -56,7 +56,7 @@ export const AddPlayerModal = ({ setShowAddPlayer }: AddPlayerModalProps) => {
               />
             </div>
             <div>
-              <Label className="text-sm text-muted-foreground mb-2 block">名前 or 特徴:</Label>
+              <Label className="text-sm text-muted-foreground mb-2 block">Name or Visual:</Label>
               <Input
                 value={newPlayer.name}
                 onChange={(e) => setNewPlayer({ ...newPlayer, name: e.target.value })}
