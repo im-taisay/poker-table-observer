@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { PlayerDetail } from './_components/PlayerDetail';
@@ -18,13 +17,13 @@ export const PageClient = () => {
   const idParam = params?.id;
   const playerId = idParam ? Number(idParam) : undefined;
 
-  if (!playerId) return null;
-
   const router = useRouter();
 
   const backToPlayers = () => {
     router.push(`/`);
   };
+
+  if (!playerId) return null;
 
   return (
     <div>

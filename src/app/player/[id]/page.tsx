@@ -1,7 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
-
 import { Header } from '@/components/common/Header';
-import { Button } from '@/components/ui/button';
 import { PageClient } from './PageClient';
 
 import '@/app/globals.css';
