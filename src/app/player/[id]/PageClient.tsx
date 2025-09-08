@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { PlayerDetail } from './_components/PlayerDetail';
 import { SelectShowedHandsModal } from './_components/SelectShowedHandsModal';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export const PageClient = () => {
   const [isOpenSelectShowedHandsModal, setIsOpenSelectShowedHandsModal] = useState(false);
@@ -17,8 +20,22 @@ export const PageClient = () => {
 
   if (!playerId) return null;
 
+  const router = useRouter();
+
+  const backToPlayers = () => {
+    router.push(`/`);
+  };
+
   return (
     <div>
+      <Button
+        variant="outline"
+        className="border-border bg-transparent mb-4"
+        onClick={backToPlayers}
+      >
+        <ArrowLeft className="w-4 h-4 mr-0.5" />
+        戻る
+      </Button>
       <div className="space-y-6">
         <Card>
           <CardHeader>
