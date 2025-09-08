@@ -25,14 +25,19 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
     <Card key={player.seat} className="bg-card border-border hover:bg-card/80 transition-colors">
       <CardContent className="p-3">
         <div className="sm:flex sm:justify-between sm:items-center">
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">#{player.seat}</span>
+          <div className="sm:flex items-center">
+            <div
+              className="flex items-center cursor-pointer"
+              onClick={() => goToPlayerDetail(player.id)}
+            >
+              <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">#{player.seat}</span>
+              </div>
+              <div className="ml-3">
+                <span className="font-bold text-lg">{player.name}</span>
+              </div>
             </div>
-            <div onClick={() => goToPlayerDetail(player.id)} className="ml-3">
-              <span className="font-bold text-lg ml-2">{player.name}</span>
-            </div>
-            <div className="flex items-center ml-auto">
+            <div className="flex justify-center items-center ml-auto mt-2 sm:mt-0">
               <div className="ml-4 mr-2 text-sm text-gray-400 italic sm:inline">
                 <span>{player.stats?.hands}H</span>
               </div>
@@ -43,14 +48,14 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center sm:block mt-5 gap-4">
+          <div className="flex justify-center sm:block mt-5 sm:mt-0 gap-4">
             <Button
               size="sm"
               onClick={(e) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.FOLD);
               }}
-              className="w-12 h-10 p-0 text-xs bg-gray-800/10 border border-gray-400 text-gray-400 hover:bg-gray-800/20"
+              className="w-12 h-10 p-0 text-xs bg-gray-800/10 border border-gray-400 text-gray-400 hover:bg-gray-800/20 sm:ml-2"
             >
               Fold
             </Button>
@@ -61,7 +66,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.CALL);
               }}
-              className="w-12 h-10 p-0 text-xs bg-chart-2/10 border border-chart-2/50 text-chart-2 hover:bg-chart-2/20"
+              className="w-12 h-10 p-0 text-xs bg-chart-2/10 border border-chart-2/50 text-chart-2 hover:bg-chart-2/20 sm:ml-2"
             >
               Call
             </Button>
@@ -71,7 +76,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-destructive/10 border border-destructive/50 text-destructive hover:bg-destructive/20"
+              className="w-12 h-10 p-0 text-xs bg-destructive/10 border border-destructive/50 text-destructive hover:bg-destructive/20 sm:ml-2"
             >
               Raise
             </Button>
@@ -81,7 +86,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RE_RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-accent/10 border border-accent-1/50 text-chart-1 hover:bg-chart-1/20"
+              className="w-12 h-10 p-0 text-xs bg-accent/10 border border-accent-1/50 text-chart-1 hover:bg-chart-1/20 sm:ml-2"
             >
               3bet
             </Button>

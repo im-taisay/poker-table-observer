@@ -18,7 +18,7 @@ export const PageClient = () => {
         <Header />
       </div>
       <PlayerList />
-      <div className="flex justify-center sm:justify-end">
+      <div className="flex justify-center sm:justify-end sm:mt-4">
         <Button
           onClick={() => setIsOpenAddPlayerModal(true)}
           className="self-center sm:self-end bg-primary hover:bg-primary/90 mt-4 sm:mt-0"
