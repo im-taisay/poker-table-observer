@@ -39,7 +39,7 @@ export const SelectShowedHandsModal = ({
                 {Array.from({ length: 2 - selectedCards.length }).map((_, index) => (
                   <div
                     key={`empty-${index}`}
-                    className="w-12 h-16 border-2 border-dashed border-gray-400 rounded-lg"
+                    className="w-12 h-14 border-2 border-dashed border-gray-400 rounded-lg"
                   ></div>
                 ))}
               </div>

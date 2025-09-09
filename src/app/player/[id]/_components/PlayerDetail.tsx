@@ -163,7 +163,7 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
             {player.stats.showedHands?.length === 0 && (
               <div className="text-sm text-muted-foreground">No hand history.</div>
             )}
-            <div className="flex flex-wrap justify-between gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2 justify-start items-start">
               {player.stats?.showedHands?.map((recordedHand, index) => (
                 <div key={index} className="flex-none w-21 sm:w-24 md:w-28 lg:w-32">
                   <RecordedHand hand={recordedHand.hand} position={recordedHand.position} />
