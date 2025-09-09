@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { User, Edit2, Trash2, Trash, Plus } from 'lucide-react';
+
 import { RecordedHand } from './RecordedHand';
 import { StatBadge } from '@/components/common/StatBadge';
 import { Label } from '@/components/ui/label';
@@ -10,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { usePlayers } from '@/providers/player-provider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { DeleteConfirmationModal } from '@/components/common/DeleteConfirmModal';
 
 interface PlayerDetailProps {
   setIsOpenSelectShowedHandsModal: (open: boolean) => void;
@@ -17,7 +20,8 @@ interface PlayerDetailProps {
 }
 
 export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: PlayerDetailProps) => {
-  const { players, onUpdatePlayer, onResetStats, onResetHands } = usePlayers();
+  const router = useRouter();
+  const { players, onUpdatePlayer, onResetStats, onResetHands, deletePlayer } = usePlayers();
 
   const player = players.find((p) => p.id === playerId);
 
@@ -26,6 +30,7 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
     name: '',
     seat: 0,
   });
+  const [isOpenDeleteConfirmModal, setIsOpenDeleteConfirmModal] = useState(false);
   const { name: editName, seat: editSeat } = editPlayerInfo;
 
   useEffect(() => {
@@ -47,13 +52,13 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
                 setEditPlayerInfo({ ...editPlayerInfo, seat: Number.parseInt(e.target.value) })
               }
               className="w-16 h-8 text-sm"
-              placeholder="席"
+              placeholder="Seat"
             />
             <Input
               value={editName}
               onChange={(e) => setEditPlayerInfo({ ...editPlayerInfo, name: e.target.value })}
               className="flex-1 h-8 text-sm"
-              placeholder="名前"
+              placeholder="Name"
             />
           </div>
           <div className="flex gap-2 mt-3 justify-end">
@@ -65,7 +70,7 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
               }}
               className="h-8 px-3"
             >
-              保存
+              Save
             </Button>
             <Button
               size="sm"
@@ -73,7 +78,7 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
               onClick={() => setIsEditing(false)}
               className="h-8 px-3 bg-transparent"
             >
-              キャンセル
+              Cancel
             </Button>
           </div>
         </div>
@@ -82,14 +87,24 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
           <span className="flex items-center gap-2">
             <User className="w-5 h-5" />#{player.seat} {player.name}
           </span>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => setIsEditing(true)}
-            className="h-8 w-8 p-0"
-          >
-            <Edit2 className="w-4 h-4" />
-          </Button>
+          <div>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setIsEditing(true)}
+              className="h-8 w-8 p-0"
+            >
+              <Edit2 className="w-4 h-4" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setIsOpenDeleteConfirmModal(true)}
+              className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+            >
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       )}
       <div className="mb-4">
@@ -184,6 +199,18 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
           </Button>
         </div>
       </div>
+      {isOpenDeleteConfirmModal && (
+        <DeleteConfirmationModal
+          title="Delete Player"
+          message={`Are you sure you want to delete this player?\n This action cannot be undone.`}
+          onClose={() => setIsOpenDeleteConfirmModal(false)}
+          onConfirm={() => {
+            deletePlayer(player.id);
+            setIsOpenDeleteConfirmModal(false);
+            router.push(`/`);
+          }}
+        />
+      )}
     </div>
   );
 };

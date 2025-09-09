@@ -48,7 +48,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center sm:block mt-5 sm:mt-0 gap-4">
+          <div className="flex justify-center mt-5 sm:mt-0 gap-4">
             <Button
               size="sm"
               onClick={(e) => {

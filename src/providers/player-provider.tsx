@@ -18,6 +18,7 @@ type PlayersContextType = {
     hand: [PlayingCardType, PlayingCardType]
   ) => void;
   onResetHands: (playerId: number) => void;
+  deletePlayer: (id: number) => void;
 };
 
 const PlayersContext = createContext<PlayersContextType | undefined>(undefined);
@@ -167,6 +168,14 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  /**
+   * Deletes a player from the list.
+   * @param id The ID of the player to delete.
+   */
+  const deletePlayer = (id: number) => {
+    setPlayers((prev) => prev.filter((player) => player.id !== id));
+  };
+
   return (
     <PlayersContext.Provider
       value={{
@@ -177,6 +186,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         onResetStats,
         addShowedHands,
         onResetHands,
+        deletePlayer,
       }}
     >
       {children}
