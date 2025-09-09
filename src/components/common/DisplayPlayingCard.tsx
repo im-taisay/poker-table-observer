@@ -25,7 +25,7 @@ export const DisplayPlayingCard = ({ rank, suit }: PlayingCardType) => {
 
   return (
     <div
-      className={`w-12 h-16 ${CARD_COLOR_CLASSES[bgKey]} border-2 border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer `}
+      className={`w-12 h-14 ${CARD_COLOR_CLASSES[bgKey]} border-2 border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer `}
     >
       <span className="text-lg font-bold text-white">{rank}</span>
       <span className={`text-lg text-white `}>{displaySuit}</span>
