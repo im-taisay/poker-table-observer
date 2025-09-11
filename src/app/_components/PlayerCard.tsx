@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { ChevronRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -27,7 +28,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
         <div className="sm:flex sm:justify-between sm:items-center">
           <div className="sm:flex items-center">
             <div
-              className="flex items-center cursor-pointer"
+              className="flex items-center gap-3 flex-1 group bg-accent/5 sm:bg-transparent rounded-lg p-2 sm:p-0 border border-accent/20 sm:border-transparent active:bg-accent/10 sm:active:bg-transparent cursor-pointer"
               onClick={() => goToPlayerDetail(player.id)}
             >
               <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
@@ -36,6 +37,8 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
               <div className="ml-3">
                 <span className="font-bold text-lg">{player.name}</span>
               </div>
+              {/* show chevron at the right only when group is hovered/focused */}
+              <ChevronRight className="ml-auto text-gray-400 opacity-100 group-focus-within:opacity-100 transition-opacity duration-150" />
             </div>
             <div className="flex justify-center items-center ml-auto mt-2 sm:mt-0">
               <div className="ml-4 mr-2 text-sm text-gray-400 italic sm:inline">
@@ -43,8 +46,8 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
               </div>
               <div className="flex gap-1 mr-2">
                 <StatBadge value={player.stats?.vpip} label="VPIP" colorClass="text-yellow-400" />
-                <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-cyan-400" />
-                <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-red-400" />
+                <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-red-400" />
+                <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-blue-400" />
               </div>
             </div>
           </div>
@@ -86,7 +89,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RE_RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-accent/10 border border-accent-1/50 text-chart-1 hover:bg-chart-1/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-blue-400/10 border border-blue-400/50 text-blue-400 hover:bg-blue-400/20 sm:ml-2"
             >
               3bet
             </Button>
