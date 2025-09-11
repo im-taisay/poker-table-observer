@@ -121,14 +121,14 @@ export const PlayerDetail = ({ setIsOpenSelectShowedHandsModal, playerId }: Play
           <StatBadge
             value={player.stats?.pfr}
             label="PFR"
-            colorClass="text-cyan-400"
+            colorClass="text-red-400"
             minWidth="w-20"
             badgeHeight={50}
           />
           <StatBadge
             value={player.stats?.reRaise}
             label="3bet"
-            colorClass="text-red-400"
+            colorClass="text-blue-400"
             minWidth="w-20"
             badgeHeight={50}
           />
