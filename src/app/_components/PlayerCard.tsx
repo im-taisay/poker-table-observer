@@ -46,8 +46,8 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
               </div>
               <div className="flex gap-1 mr-2">
                 <StatBadge value={player.stats?.vpip} label="VPIP" colorClass="text-yellow-400" />
-                <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-cyan-400" />
-                <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-red-400" />
+                <StatBadge value={player.stats?.pfr} label="PFR" colorClass="text-red-400" />
+                <StatBadge value={player.stats?.reRaise} label="3bet" colorClass="text-blue-400" />
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RE_RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-accent/10 border border-accent-1/50 text-chart-1 hover:bg-chart-1/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-blue-400/10 border border-blue-400/50 text-blue-400 hover:bg-blue-400/20 sm:ml-2"
             >
               3bet
             </Button>
