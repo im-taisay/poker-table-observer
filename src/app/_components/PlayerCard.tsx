@@ -59,7 +59,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.FOLD);
               }}
-              className="w-12 h-10 p-0 text-xs bg-gray-800/10 border border-gray-400 text-gray-400 hover:bg-gray-800/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-gray-800/10 border border-gray-400 text-gray-400 hover:bg-chart-1/20 sm:ml-2 active:scale-95 active:translate-y-0.5 transition-transform"
             >
               Fold
             </Button>
@@ -70,7 +70,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.CALL);
               }}
-              className="w-12 h-10 p-0 text-xs bg-chart-2/10 border border-chart-2/50 text-chart-2 hover:bg-chart-2/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-chart-2/10 border border-chart-2/50 text-chart-2 hover:bg-chart-2/20 sm:ml-2 active:scale-95 active:translate-y-0.5 transition-transform"
             >
               Call
             </Button>
@@ -80,7 +80,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-destructive/10 border border-destructive/50 text-destructive hover:bg-destructive/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-destructive/10 border border-destructive/50 text-destructive hover:bg-destructive/20 sm:ml-2 active:scale-95 active:translate-y-0.5 transition-transform"
             >
               Raise
             </Button>
@@ -90,7 +90,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
                 e.stopPropagation();
                 onRecordAction(player.id, PF_ACTION.RE_RAISE);
               }}
-              className="w-12 h-10 p-0 text-xs bg-blue-400/10 border border-blue-400/50 text-blue-400 hover:bg-blue-400/20 sm:ml-2"
+              className="w-12 h-10 p-0 text-xs bg-blue-400/10 border border-blue-400/50 text-blue-400 hover:bg-blue-400/20 sm:ml-2 active:scale-95 active:translate-y-0.5 transition-transform"
             >
               3bet
             </Button>
