@@ -1,7 +1,6 @@
 'use client';
 
 import { PlayerCard } from './PlayerCard';
-import { useMemo } from 'react';
 import { usePlayers } from '@/providers/player-provider';
 
 export const PlayerList = () => {
