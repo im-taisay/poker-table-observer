@@ -14,3 +14,26 @@ export const CARD_COLOR_CLASSES = {
   red: 'bg-red-600 hover:bg-red-700 disabled:bg-red-800',
   gray: 'bg-gray-600 hover:bg-gray-700 disabled:bg-gray-800',
 } as const;
+
+export const PF_ACTIONS = {
+  FOLD: 'fold',
+  CALL: 'call',
+  RAISE: 'raise',
+  RE_RAISE: '3bet',
+} as const;
+
+export const POST_ACTIONS = {
+  CHECK: 'check',
+  BET: 'bet',
+  CALL: 'call',
+  RAISE: 'raise',
+  ALL_IN: 'all-in',
+  FOLD: 'fold',
+};
+
+export const STREETS = {
+  PRE_FLOP: 'PreFlop',
+  FLOP: 'Flop',
+  TURN: 'Turn',
+  RIVER: 'River',
+};
