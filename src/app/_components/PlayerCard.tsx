@@ -29,7 +29,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
         <div className="sm:flex sm:justify-between sm:items-center">
           <div className="sm:flex items-center">
             <div
-              className="flex items-center gap-3 flex-1 group bg-accent/5 sm:bg-transparent rounded-lg p-2 sm:p-0 border border-accent/20 sm:border-transparent active:bg-accent/10 sm:active:bg-transparent cursor-pointer"
+              className="flex items-center gap-3 flex-1 group bg-accent/5 sm:bg-transparent rounded-lg p-2 sm:p-0 border border-accent/20 border-transparent active:bg-accent/10 active:bg-transparent cursor-pointer"
               onClick={() => goToPlayerDetail(player.id)}
             >
               <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">

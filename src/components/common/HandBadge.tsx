@@ -41,7 +41,7 @@ export const HandsBadge = ({
   }, [value]);
 
   const style: React.CSSProperties = {
-    ['--badge-h' as any]: `${badgeHeight}px`,
+    ['--badge-h']: `${badgeHeight}px`,
   } as React.CSSProperties;
 
   return (

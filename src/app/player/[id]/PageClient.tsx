@@ -29,7 +29,7 @@ export const PageClient = () => {
     <div>
       <Button
         variant="outline"
-        className="border-border bg-transparent mb-4"
+        className="border-border bg-transparent mb-4 active:scale-95 active:translate-y-0.5 transition-transform"
         onClick={backToPlayers}
       >
         <ArrowLeft className="w-4 h-4 mr-0.5" />
