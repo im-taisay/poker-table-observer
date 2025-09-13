@@ -5,6 +5,7 @@ import { ChevronRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { HandsBadge } from '@/components/common/HandBadge';
 import { StatBadge } from '@/components/common/StatBadge';
 
 import { PlayerWithStats } from '@/types/player';
@@ -42,7 +43,7 @@ export const PlayerCard = ({ player }: { player: PlayerWithStats }) => {
             </div>
             <div className="flex justify-center items-center ml-auto mt-2 sm:mt-0">
               <div className="ml-4 mr-2 text-sm text-gray-400 italic sm:inline">
-                <span>{player.stats?.hands}H</span>
+                <HandsBadge value={player.stats?.hands} label="Hands" colorClass="text-gray-400" />
               </div>
               <div className="flex gap-1 mr-2">
                 <StatBadge value={player.stats?.vpip} label="VPIP" colorClass="text-yellow-400" />
