@@ -1,15 +1,16 @@
 'use client';
 
 import { PlayerCard } from './PlayerCard';
-
 import { usePlayers } from '@/providers/player-provider';
 
 export const PlayerList = () => {
   const { players } = usePlayers();
 
+  const sortedPlayers = [...players].sort((a, b) => (a.seat ?? 0) - (b.seat ?? 0));
+
   return (
     <div className="space-y-4">
-      {players.map((player) => (
+      {sortedPlayers.map((player) => (
         <PlayerCard key={player.id} player={player} />
       ))}
     </div>

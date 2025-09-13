@@ -48,24 +48,28 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
    * @param newPlayer The player information to add.
    */
   const addPlayer = (newPlayer: PlayerInfo) => {
-    setPlayers([
-      ...players,
-      {
-        id: players.length + 1,
-        seat: newPlayer.seat,
-        name: newPlayer.name,
-        notes: newPlayer.notes,
-        stats: {
-          hands: 0,
-          vpip: 0,
-          pfr: 0,
-          reRaise: 0,
-          pfCallCount: 0,
-          pfRaiseCount: 0,
-          pfReRaiseCount: 0,
+    setPlayers((prev) => {
+      // Generate a new ID
+      const nextId = prev.length ? Math.max(...prev.map((p) => p.id)) + 1 : 1;
+      return [
+        ...prev,
+        {
+          id: nextId,
+          seat: newPlayer.seat,
+          name: newPlayer.name,
+          notes: newPlayer.notes,
+          stats: {
+            hands: 0,
+            vpip: 0,
+            pfr: 0,
+            reRaise: 0,
+            pfCallCount: 0,
+            pfRaiseCount: 0,
+            pfReRaiseCount: 0,
+          },
         },
-      },
-    ]);
+      ];
+    });
   };
 
   /**
