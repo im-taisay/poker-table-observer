@@ -8,6 +8,7 @@ import { Header } from '@/components/common/Header';
 import { PlayerList } from './_components/PlayerList';
 import { Button } from '@/components/ui/button';
 import { AddPlayerModal } from './_components/AddPlayerModal';
+import { NavigationHeader } from '@/components/common/NavigationHeader';
 
 export const PageClient = () => {
   const [isOpenAddPlayerModal, setIsOpenAddPlayerModal] = useState(false);
@@ -16,6 +17,9 @@ export const PageClient = () => {
     <div>
       <div className="mb-6">
         <Header />
+      </div>
+      <div className="mb-10">
+        <NavigationHeader activeTab="analysis" setActiveTab={() => {}} />
       </div>
       <PlayerList />
       <div className="flex justify-center sm:justify-end sm:mt-4">
