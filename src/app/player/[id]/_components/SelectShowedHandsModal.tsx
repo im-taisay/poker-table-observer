@@ -75,6 +75,7 @@ export const SelectShowedHandsModal = ({
                 addShowedHands(playerId, selectedPosition, [selectedCards[0], selectedCards[1]]);
                 setIsOpenSelectShowedHandsModal(false);
               }}
+              disabled={selectedCards.length !== 2}
               className="mt-4 w-24 bg-primary hover:bg-primary/90"
             >
               Save
