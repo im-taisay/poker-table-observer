@@ -36,4 +36,10 @@ export const STREETS = {
   FLOP: 'Flop',
   TURN: 'Turn',
   RIVER: 'River',
-};
+} as const;
+
+export const POST_FLOP_BOARD_CARD = [
+  { STREET: 'Flop', COUNT: 3 },
+  { STREET: 'Turn', COUNT: 1 },
+  { STREET: 'River', COUNT: 1 },
+] as const;

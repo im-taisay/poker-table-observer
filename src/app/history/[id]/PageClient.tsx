@@ -2,18 +2,11 @@
 import { useState } from 'react';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PositionSelector } from './_components/PositionSelector';
+import { BoardSelector } from './_components/BoardSelector';
 
-import { POSITIONS, STREETS } from '@/const/game';
+import { STREETS } from '@/const/game';
 
 import { Position, Street } from '@/types/game';
 
@@ -55,7 +48,26 @@ export const PageClient = () => {
             {Object.values(STREETS).map((street) => (
               <TabsContent key={street} value={street} className="mt-4">
                 <div className="text-sm text-muted-foreground">Content for {street}</div>
-                <div className="grid gap-4"></div>
+                <div className="grid gap-4">
+                  {street === STREETS.PRE_FLOP ? (
+                    <div></div>
+                  ) : (
+                    <Card className="bg-muted/30 border-border">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-sm font-medium text-muted-foreground">
+                          {/* {boardInfo.label} */}
+                        </CardTitle>
+                      </CardHeader>
+
+                      <CardContent>
+                        <BoardSelector
+                          street={street}
+                          openCardModal={(street) => console.log(`Open card modal for ${street}`)}
+                        />
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
               </TabsContent>
             ))}
           </Tabs>
