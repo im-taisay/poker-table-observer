@@ -1,19 +1,26 @@
 'use client';
 import { useState } from 'react';
 
+import { Save } from 'lucide-react';
+
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 import { PositionSelector } from './_components/PositionSelector';
 import { BoardSelector } from './_components/BoardSelector';
+import { BetActionSelector } from './_components/BetActionSelector';
 
-import { STREETS } from '@/const/game';
-
-import { Position, Street } from '@/types/game';
+import { Position } from '@/types/game';
 
 export const PageClient = () => {
-  const [heroPosition, setHeroPosition] = useState<Position | undefined>(undefined);
-  const [villainPosition, setVillainPosition] = useState<Position | undefined>(undefined);
-  const [currentStreet, setCurrentStreet] = useState<Street>('PreFlop');
+  const [heroPosition, setHeroPosition] = useState<Position>('BTN');
+  const [villainPosition, setVillainPosition] = useState<Position>('BB');
+  // const [currentStreet, setCurrentStreet] = useState<PostFlopStreet>('Flop');
+
+  const [board, setBoard] = useState({
+    flop: ['', '', ''],
+    turn: '',
+    river: '',
+  });
 
   return (
     <div className="space-y-6">
@@ -31,46 +38,34 @@ export const PageClient = () => {
               setPosition={setVillainPosition}
             />
           </div>
+          {/* Board Selection */}
+          <div className="mt-6">
+            <Card className="bg-muted/30 border-border">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  ボードカード選択
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <BoardSelector board={board} onBoardChange={setBoard} />
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Street Selection */}
-          <Tabs
-            value={currentStreet}
-            onValueChange={(value: string) => setCurrentStreet(value as Street)}
-            className="w-full"
-          >
-            <TabsList className="grid w-full grid-cols-4">
-              {Object.values(STREETS).map((street) => (
-                <TabsTrigger key={street} value={street} className="capitalize">
-                  {street}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {Object.values(STREETS).map((street) => (
-              <TabsContent key={street} value={street} className="mt-4">
-                <div className="text-sm text-muted-foreground">Content for {street}</div>
-                <div className="grid gap-4">
-                  {street === STREETS.PRE_FLOP ? (
-                    <div></div>
-                  ) : (
-                    <Card className="bg-muted/30 border-border">
-                      <CardHeader className="pb-3">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">
-                          {/* {boardInfo.label} */}
-                        </CardTitle>
-                      </CardHeader>
-
-                      <CardContent>
-                        <BoardSelector
-                          street={street}
-                          openCardModal={(street) => console.log(`Open card modal for ${street}`)}
-                        />
-                      </CardContent>
-                    </Card>
-                  )}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+          {/* Bet Action Selection */}
+          <div className="mt-6">
+            <BetActionSelector heroPosition={heroPosition} villainPosition={villainPosition} />
+          </div>
+          {/* Action Buttons */}
+          <div className="flex gap-2 justify-end">
+            <Button variant="outline" onClick={() => console.log('cancel')} className="mr-2">
+              キャンセル
+            </Button>
+            <Button onClick={() => {}} className="bg-primary hover:bg-primary/90">
+              <Save className="w-4 h-4 mr-2" />
+              Save
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -1,7 +1,5 @@
 import { PageClient } from './PageClient';
 
-import './globals.css';
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-background p-4">

@@ -1,5 +1,3 @@
-import { Plus } from 'lucide-react';
-
 import { Header } from '@/components/common/Header';
 import { HistoryPageClient } from './pageClient';
 
